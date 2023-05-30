@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unit Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+    }
+    .converter {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+    }
+    .result {
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+    select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Unit Converter</h1>
+
+  <div class="converter">
+    <h3>Length Converter</h3>
+    <label>Value:</label>
+    <input type="number" id="lengthInput">
+    <label>From:</label>
+    <select id="lengthFrom">
+      <option value="cm">Centimeters</option>
+      <option value="m">Meters</option>
+      <option value="km">Kilometers</option>
+      <option value="in">Inches</option>
+      <option value="ft">Feet</option>
+      <option value="yd">Yards</option>
+      <option value="mi">Miles</option>
+    </select>
+    <label>To:</label>
+    <select id="lengthTo">
+      <option value="cm">Centimeters</option>
+      <option value="m">Meters</option>
+      <option value="km">Kilometers</option>
+      <option value="in">Inches</option>
+      <option value="ft">Feet</option>
+      <option value="yd">Yards</option>
+      <option value="mi">Miles</option>
+    </select>
+    <button onclick="convertLength()">Convert</button>
+    <p class="result" id="lengthResult"></p>
+  </div>
+
+  <div class="converter">
+    <h3>Weight Converter</h3>
+    <label>Value:</label>
+    <input type="number" id="weightInput">
+    <label>From:</label>
+    <select id="weightFrom">
+      <option value="g">Grams</option>
+      <option value="kg">Kilograms</option>
+      <option value="oz">Ounces</option>
+      <option value="lb">Pounds</option>
+    </select>
+    <label>To:</label>
+    <select id="weightTo">
+      <option value="g">Grams</option>
+      <option value="kg">Kilograms</option>
+      <option value="oz">Ounces</option>
+      <option value="lb">Pounds</option>
+    </select>
+    <button onclick="convertWeight()">Convert</button>
+    <p class="result" id="weightResult"></p>
+  </div>
+
+  <div class="converter">
+    <h3>Area Converter</h3>
+    <label>Value:</label>
+    <input type="number" id="areaInput">
+    <label>From:</label>
+    <select id="areaFrom">
+      <option value="sqcm">Square Centimeters</option>
+      <option value="sqm">Square Meters</option>
+      <option value="sqkm">Square Kilometers</option>
+      <option value="sqin">Square Inches</option>
+      <option value="sqft">Square Feet</option>
+      <option value="sqyd">Square Yards</option>
+      <option value="sqmi">Square Miles</option>
+    </select>
+    <label>To:</label>
+    <select id="areaTo">
+      <option value="sqcm">Square Centimeters</option>
+      <option value="sqm">Square Meters</option>
+      <option value="sqkm">Square Kilometers</option>
+      <option value="sqin">Square Inches</option>
+      <option value="sqft">Square Feet</option>
+      <option value="sqyd">Square Yards</option>
+      <option value="sqmi">Square Miles</option>
+    </select>
+    <button onclick="convertArea()">Convert</button>
+    <p class="result" id="areaResult"></p>
+  </div>
+
+  <div class="converter">
+    <h3>Time Converter</h3>
+    <label>Value:</label>
+    <input type="number" id="timeInput">
+    <label>From:</label>
+    <select id="timeFrom">
+      <option value="sec">Seconds</option>
+      <option value="min">Minutes</option>
+      <option value="hr">Hours</option>
+      <option value="day">Days</option>
+      <option value="wk">Weeks</option>
+      <option value="month">Months</option>
+      <option value="year">Years</option>
+    </select>
+    <label>To:</label>
+    <select id="timeTo">
+      <option value="sec">Seconds</option>
+      <option value="min">Minutes</option>
+      <option value="hr">Hours</option>
+      <option value="day">Days</option>
+      <option value="wk">Weeks</option>
+      <option value="month">Months</option>
+      <option value="year">Years</option>
+    </select>
+    <button onclick="convertTime()">Convert</button>
+    <p class="result" id="timeResult"></p>
+  </div>
+
+  <div class="converter">
+    <h3>Speed Converter</h3>
+    <label>Value:</label>
+    <input type="number" id="speedInput">
+    <label>From:</label>
+    <select id="speedFrom">
+      <option value="mps">Meters per Second</option>
+      <option value="kmph">Kilometers per Hour</option>
+      <option value="mph">Miles per Hour</option>
+    </select>
+    <label>To:</label>
+    <select id="speedTo">
+      <option value="mps">Meters per Second</option>
+      <option value="kmph">Kilometers per Hour</option>
+      <option value="mph">Miles per Hour</option>
+    </select>
+    <button onclick="convertSpeed()">Convert</button>
+    <p class="result" id="speedResult"></p>
+  </div>
+
+  <script>
+    function convertLength() {
+      const value = parseFloat(document.getElementById("lengthInput").value);
+      const fromUnit = document.getElementById("lengthFrom").value;
+      const toUnit = document.getElementById("lengthTo").value;
+
+      let result;
+
+      // Conversion logic
+      if (fromUnit === "cm" && toUnit === "m") {
+        result = value / 100;
+      } else if (fromUnit === "cm" && toUnit === "km") {
+        result = value / 100000;
+      } else if (fromUnit === "cm" && toUnit === "in") {
+        result = value / 2.54;
+      } else if (fromUnit === "cm" && toUnit === "ft") {
+        result = value / 30.48;
+      } else if (fromUnit === "cm" && toUnit === "yd") {
+        result = value / 91.44;
+      } else if (fromUnit === "cm" && toUnit === "mi") {
+        result = value / 160934.4;
+      }
+      // Add more conversion options for other units
+
+      document.getElementById("lengthResult").innerHTML = result.toFixed(2) + " " + toUnit;
+    }
+
+    function convertWeight() {
+      const value = parseFloat(document.getElementById("weightInput").value);
+      const fromUnit = document.getElementById("weightFrom").value;
+      const toUnit = document.getElementById("weightTo").value;
+
+      let result;
+
+      // Conversion logic
+      if (fromUnit === "g" && toUnit === "kg") {
+        result = value / 1000;
+      } else if (fromUnit === "g" && toUnit === "oz") {
+        result = value / 28.35;
+      } else if (fromUnit === "g" && toUnit === "lb") {
+        result = value / 453.59;
+      }
+      // Add more conversion options for other units
+
+      document.getElementById("weightResult").innerHTML = result.toFixed(2) + " " + toUnit;
+    }
+
+    function convertArea() {
+      const value = parseFloat(document.getElementById("areaInput").value);
+      const fromUnit = document.getElementById("areaFrom").value;
+      const toUnit = document.getElementById("areaTo").value;
+
+      let result;
+
+      // Conversion logic
+      if (fromUnit === "sqcm" && toUnit === "sqm") {
+        result = value / 10000;
+      } else if (fromUnit === "sqcm" && toUnit === "sqkm") {
+        result = value / 10000000000;
+      } else if (fromUnit === "sqcm" && toUnit === "sqin") {
+        result = value / 6.452;
+      } else if (fromUnit === "sqcm" && toUnit === "sqft") {
+        result = value / 929.03;
+      } else if (fromUnit === "sqcm" && toUnit === "sqyd") {
+        result = value / 8361.2736;
+      } else if (fromUnit === "sqcm" && toUnit === "sqmi") {
+        result = value / 25899881103.36;
+      }
+      // Add more conversion options for other units
+
+      document.getElementById("areaResult").innerHTML = result.toFixed(2) + " " + toUnit;
+    }
+
+    function convertTime() {
+      const value = parseFloat(document.getElementById("timeInput").value);
+      const fromUnit = document.getElementById("timeFrom").value;
+      const toUnit = document.getElementById("timeTo").value;
+
+      let result;
+
+      // Conversion logic
+      if (fromUnit === "sec" && toUnit === "min") {
+        result = value / 60;
+      } else if (fromUnit === "sec" && toUnit === "hr") {
+        result = value / 3600;
+      } else if (fromUnit === "sec" && toUnit === "day") {
+        result = value / 86400;
+      }
+      // Add more conversion options for other units
+
+      document.getElementById("timeResult").innerHTML = result.toFixed(2) + " " + toUnit;
+    }
+
+    function convertSpeed() {
+      const value = parseFloat(document.getElementById("speedInput").value);
+      const fromUnit = document.getElementById("speedFrom").value;
+      const toUnit = document.getElementById("speedTo").value;
+
+      let result;
+
+      // Conversion logic
+      if (fromUnit === "mps" && toUnit === "kmph") {
+        result = value * 3.6;
+      } else if (fromUnit === "mps" && toUnit === "mph") {
+        result = value * 2.23694;
+      }
+      // Add more conversion options for other units
+
+      document.getElementById("speedResult").innerHTML = result.toFixed(2) + " " + toUnit;
+    }
+  </script>
+</body>
+</html>
